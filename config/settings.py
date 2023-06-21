@@ -46,11 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
-    'extensions',
+    'questions',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'questions',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'question.User'
+AUTH_USER_MODEL = 'questions.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
