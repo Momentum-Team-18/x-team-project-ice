@@ -6,6 +6,13 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
+psycopg2-binary = "*"
+django-environ = "*"
+django-extensions = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
