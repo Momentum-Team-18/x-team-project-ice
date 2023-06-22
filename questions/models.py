@@ -10,11 +10,11 @@ class User(AbstractUser):
 class Question(models.Model):
     question_title = models.CharField(max_length=250)
     question_author = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name="authors_of_questions")
+        to=User, on_delete=models.CASCADE, related_name="questions")
     question_text = models.TextField()
     question_date = models.DateTimeField(default=timezone.now())
     question_is_answered = models.BooleanField(default=False)
-    is_favorite = models.ManyToManyField
+
     class Meta:
         ordering = ['-question_date']
 
@@ -22,10 +22,10 @@ class Question(models.Model):
 class Answer(models.Model):
     answer_text = models.TextField()
     answer_author = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='authors_of_answers')
+        to=User, on_delete=models.CASCADE, related_name='answers')
     answer_date = models.DateTimeField(default=timezone.now())
     related_question = models.ForeignKey(
-        to=Question, on_delete=models.CASCADE, related_name='answers_to_question')
+        to=Question, on_delete=models.CASCADE, related_name='answers')
     answer_accepted = models.BooleanField(default=False)
 
     class Meta:
