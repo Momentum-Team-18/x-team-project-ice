@@ -54,12 +54,14 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'questions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -165,3 +167,6 @@ if env("RENDER"):
     DJANGO_SUPERUSER_PASSWORD = env(
         "DJANGO_SUPERUSER_PASSWORD")  # add this too
     DJANGO_SUPERUSER_EMAIL = env("DJANGO_SUPERUSER_EMAIL")  # and also this
+
+
+CORS_ALLOW_ALL_ORIGINS = True
