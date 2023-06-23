@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'djoser',
     'questions',
     'corsheaders',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
