@@ -15,3 +15,15 @@ class QuestionViewSet(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(question_author=self.request.user)
+
+
+class QuestionByUserViewSet(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['question_title', 'question_author',
+                     'question_text', 'question_date']
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return self.queryset.filter(question_author=self.request.user)
