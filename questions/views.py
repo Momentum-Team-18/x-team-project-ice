@@ -13,5 +13,5 @@ class QuestionViewSet(generics.ListCreateAPIView):
                      'question_text', 'question_date']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    # def perform_create(self, serializer):
-    #     serializer.save(question_author=self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(question_author=self.request.user)
