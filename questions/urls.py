@@ -3,8 +3,9 @@ from questions import views
 
 
 urlpatterns = [
-    path('questions/', views.QuestionViewSet.as_view(), name='questions'),
-    path('questions/user/', views.QuestionByUserViewSet.as_view(),
-         name='user_questions'),
-
+    path("questions/", views.QuestionViewSet.as_view(), name="questions"),
+    path(
+        "questions/user/", views.QuestionByUserViewSet.as_view(), name="user_questions"
+    ),
+    path("questions/answer/", views.AnswerByQuestionViewSet.as_view()),
 ]
