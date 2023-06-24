@@ -13,6 +13,7 @@ class QuestionViewSet(generics.ListCreateAPIView):
         "question_author",
         "question_text",
         "question_date",
+        "question_is_answered",
     ]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -29,6 +30,7 @@ class QuestionByUserViewSet(generics.ListCreateAPIView):
         "question_author",
         "question_text",
         "question_date",
+        "question is answered",
     ]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -53,4 +55,4 @@ class AnswerByQuestionViewSet(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return self.queryset.filter(related_question=self.request.answer)
+        return self.queryset.filter(related_question=self.request.question)
