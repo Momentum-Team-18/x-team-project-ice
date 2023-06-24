@@ -3,26 +3,31 @@ from questions.models import Question, Answer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
+    question_author = serializers.SlugRelatedField(
+        slug_field='username', read_only=True)
+
     class Meta:
         model = Question
         fields = [
             "id",
+            "question_author",
             "question_title",
             "question_text",
-            "question_author",
             "question_is_answered",
         ]
 
 
 class AnswerSerializer(serializers.ModelSerializer):
+    answer_author = serializers.SlugRelatedField(
+        slug_field='username', read_only=True)
     class Meta:
         model = Answer
         fields = [
             "id",
+            "answer_author",
             "answer_text",
             "answer_author",
             "answer_date",
-            "answer_author",
             "related_question",
             "answer_accepted",
         ]
