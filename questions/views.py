@@ -41,6 +41,9 @@ class QuestionByUserViewSet(generics.ListCreateAPIView):
     def get_queryset(self):
         return self.queryset.filter(question_author=self.request.user)
 
+    def perform_create(self, serializer):
+        serializer.save(question_author=self.request.user)
+
 
 class AnswerByQuestionViewSet(generics.ListCreateAPIView):
     queryset = Answer.objects.all()
@@ -60,6 +63,9 @@ class AnswerByQuestionViewSet(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(related_question=self.request.question)
+
+    def perform_create(self, serializer):
+        serializer.save(answer_author=self.request.user)
 
 
 class QuestionWithAnswerViewSet(generics.RetrieveDestroyAPIView):
