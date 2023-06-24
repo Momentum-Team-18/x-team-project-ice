@@ -1,7 +1,11 @@
 from rest_framework import generics, permissions, filters
 from django.shortcuts import render
 from questions.models import Question, Answer
-from questions.serializers import QuestionSerializer, AnswerSerializer
+from questions.serializers import (
+    QuestionSerializer,
+    AnswerSerializer,
+    QuestionWithAnswerSerializer,
+)
 
 
 class QuestionViewSet(generics.ListCreateAPIView):
@@ -56,3 +60,9 @@ class AnswerByQuestionViewSet(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(related_question=self.request.question)
+
+
+class QuestionWithAnswerViewSet(generics.RetrieveDestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionWithAnswerSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

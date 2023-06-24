@@ -5,8 +5,13 @@ from questions.models import Question, Answer
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ["id", "question_title", "question_text",
-                  "question_author", "question_is_answered"]
+        fields = [
+            "id",
+            "question_title",
+            "question_text",
+            "question_author",
+            "question_is_answered",
+        ]
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -20,4 +25,19 @@ class AnswerSerializer(serializers.ModelSerializer):
             "answer_author",
             "related_question",
             "answer_accepted",
+        ]
+
+
+class QuestionWithAnswerSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Question
+        fields = [
+            "id",
+            "question_title",
+            "question_text",
+            "question_author",
+            "question_is_answered",
+            "answers",
         ]
