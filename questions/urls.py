@@ -7,5 +7,5 @@ urlpatterns = [
     path(
         "questions/user/", views.QuestionByUserViewSet.as_view(), name="user_questions"
     ),
-    path("questions/answer/", views.AnswerByQuestionViewSet.as_view()),
+    path("questions/answer/", views.AnswerByQuestionViewSet.as_view(), name="answers"),
 ]
