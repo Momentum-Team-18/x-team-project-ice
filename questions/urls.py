@@ -17,4 +17,7 @@ urlpatterns = [
         views.QuestionWithAnswerViewSet.as_view(),
         name="question_details",
     ),
+    # PATCH
+    path('answers/accept/<int:pk>/', views.AcceptAnswerViewSet.as_view(),
+         name='accept_answer'),
 ]

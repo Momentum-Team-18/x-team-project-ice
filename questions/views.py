@@ -2,10 +2,8 @@ from rest_framework import generics, permissions, filters
 from django.shortcuts import render
 from questions.models import Question, Answer
 from questions.serializers import (
-    QuestionSerializer,
-    AnswerSerializer,
-    QuestionWithAnswerSerializer,
-)
+    QuestionSerializer, AnswerSerializer, QuestionWithAnswerSerializer)
+from django.core.exceptions import PermissionDenied
 
 
 class QuestionViewSet(generics.ListCreateAPIView):
@@ -72,3 +70,18 @@ class QuestionWithAnswerViewSet(generics.RetrieveDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionWithAnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    # def perform_update(self, serializer):
+    #     serializer.save(answer_accepted=True)
+
+
+class AcceptAnswerViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_update(self, serializer):
+        answer = super().get_object()
+        if self.request.user != answer.related_question.question_author:
+            raise PermissionDenied
+        serializer.save()
