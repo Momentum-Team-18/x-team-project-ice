@@ -18,6 +18,15 @@ urlpatterns = [
         name="question_details",
     ),
     # PATCH
-    path('answers/accept/<int:pk>/', views.AcceptAnswerViewSet.as_view(),
-         name='accept_answer'),
+    path(
+        "answers/accept/<int:pk>/",
+        views.AcceptAnswerViewSet.as_view(),
+        name="accept_answer",
+    ),
+    # GET
+    path(
+        "answers/user/<int:pk>/",
+        views.UserAnswersViewSet.as_view(),
+        name="user_answers",
+    ),
 ]
