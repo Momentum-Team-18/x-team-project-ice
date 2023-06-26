@@ -88,3 +88,9 @@ https://questionapi.onrender.com
 ```https://questionapi.onrender.com
   GET /questions/pk/
 ```
+
+#### Delete Question
+
+```https://questionapi.onrender.com
+  DELETE /questions/delete/pk
+```
