@@ -97,3 +97,16 @@ class UserAnswersViewSet(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(answer_author=self.request.user)
+
+
+class DeleteQuestionViewSet(generics.DestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_destroy(self, instance):
+        question = super().get_object()
+        if self.request.user != question.question_author:
+            raise PermissionDenied
+        else:
+            super().perform_destroy(instance)
