@@ -18,7 +18,7 @@ urlpatterns = [
     path("answers/accept/<int:pk>/",
          views.AcceptAnswerViewSet.as_view(), name="accept_answer"),
     # GET
-    path("answers/user/",
+    path("answers/user/<int:pk>/",
          views.UserAnswersViewSet.as_view(), name="user_answers"),
     # DELETE
     path("questions/delete/<int:pk>/",
