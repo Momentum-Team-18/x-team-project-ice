@@ -89,6 +89,11 @@ https://questionapi.onrender.com
   GET /questions/pk/
 ```
 
+#### List User Answers
+
+```https://questionapi.onrender.com
+  GET //user/answers/
+
 #### Delete Question
 
 ```https://questionapi.onrender.com

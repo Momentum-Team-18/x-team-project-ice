@@ -90,13 +90,14 @@ class AcceptAnswerViewSet(generics.RetrieveUpdateDestroyAPIView):
         serializer.save()
 
 
-class UserAnswersViewSet(generics.RetrieveAPIView):
+class UserAnswersViewSet(generics.ListAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return self.queryset.filter(answer_author=self.request.user)
+        queryset = Answer.objects.filter(answer_author=self.request.user.pk)
+        return queryset
 
 
 class DeleteQuestionViewSet(generics.DestroyAPIView):
