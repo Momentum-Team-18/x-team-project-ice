@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, filters
+from rest_framework.response import Response
 from django.shortcuts import render
 from questions.models import Question, Answer
 from questions.serializers import (
@@ -7,6 +8,7 @@ from questions.serializers import (
     QuestionWithAnswerSerializer,
 )
 from django.core.exceptions import PermissionDenied
+from rest_framework.views import APIView
 
 
 class QuestionViewSet(generics.ListCreateAPIView):
@@ -111,3 +113,23 @@ class DeleteQuestionViewSet(generics.DestroyAPIView):
             raise PermissionDenied
         else:
             super().perform_destroy(instance)
+
+
+class QuestionSearchViewSet(APIView):
+    def get(self, request, format=None):
+        question_text = request.query_params.get("question_text")
+        question_title = request.query_params.get("question_title")
+
+        results = Question.objects.all()
+
+        if question_text:
+            results = results.filter(
+                question_text__icontains=request.query_params.get("question_text")
+            )
+        if question_title:
+            results = results.filter(
+                question_title__icontains=request.query_params.get("question_title")
+            )
+
+        serializer = QuestionSerializer(results, many=True)
+        return Response(serializer.data)
