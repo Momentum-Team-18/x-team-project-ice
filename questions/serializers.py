@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from questions.models import Question, Answer
+from questions.models import Question, Answer, Upload
 
 
 class QuestionSerializer(serializers.ModelSerializer):
     question_author = serializers.SlugRelatedField(
-        slug_field='username', read_only=True)
+        slug_field="username", read_only=True
+    )
 
     class Meta:
         model = Question
@@ -18,8 +19,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    answer_author = serializers.SlugRelatedField(
-        slug_field='username', read_only=True)
+    answer_author = serializers.SlugRelatedField(slug_field="username", read_only=True)
 
     class Meta:
         model = Answer
@@ -46,4 +46,15 @@ class QuestionWithAnswerSerializer(serializers.ModelSerializer):
             "question_author",
             "question_is_answered",
             "answers",
+        ]
+
+
+class UploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Upload
+        fields = [
+            "id",
+            "question",
+            "answer",
+            "file",
         ]
