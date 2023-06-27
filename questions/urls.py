@@ -12,15 +12,29 @@ urlpatterns = [
     # GET|POST
     path("questions/answer/", views.AnswerByQuestionViewSet.as_view(), name="answers"),
     # GET
-    path("questions/<int:pk>/", views.QuestionWithAnswerViewSet.as_view(),
-         name="question_details"),
+    path(
+        "questions/<int:pk>/",
+        views.QuestionWithAnswerViewSet.as_view(),
+        name="question_details",
+    ),
     # PATCH
-    path("answers/accept/<int:pk>/",
-         views.AcceptAnswerViewSet.as_view(), name="accept_answer"),
+    path(
+        "answers/accept/<int:pk>/",
+        views.AcceptAnswerViewSet.as_view(),
+        name="accept_answer",
+    ),
     # GET
-    path("user/answers/",
-         views.UserAnswersViewSet.as_view(), name="user_answers"),
+    path("user/answers/", views.UserAnswersViewSet.as_view(), name="user_answers"),
     # DELETE
-    path("questions/delete/<int:pk>/",
-         views.DeleteQuestionViewSet.as_view(), name="delete_question"),
+    path(
+        "questions/delete/<int:pk>/",
+        views.DeleteQuestionViewSet.as_view(),
+        name="delete_question",
+    ),
+    # GET
+    path(
+        "questions/search/",
+        views.QuestionSearchViewSet.as_view(),
+        name="questions_search",
+    ),
 ]
