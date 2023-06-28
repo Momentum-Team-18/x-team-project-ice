@@ -37,4 +37,6 @@ urlpatterns = [
         views.QuestionSearchViewSet.as_view(),
         name="questions_search",
     ),
+    # POST
+    path("uploads/", views.UploadCreateView.as_view()),
 ]

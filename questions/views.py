@@ -1,11 +1,12 @@
 from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from django.shortcuts import render
-from questions.models import Question, Answer
+from questions.models import Question, Answer, Upload
 from questions.serializers import (
     QuestionSerializer,
     AnswerSerializer,
     QuestionWithAnswerSerializer,
+    UploadSerializer,
 )
 from django.core.exceptions import PermissionDenied
 from rest_framework.views import APIView
@@ -135,3 +136,9 @@ class QuestionSearchViewSet(APIView):
 
         serializer = QuestionSerializer(results, many=True)
         return Response(serializer.data)
+
+
+class UploadCreateView(generics.CreateAPIView):
+    queryset = Upload.objects.all()
+    serializer_class = UploadSerializer
+    permission_classes = [permissions.IsAuthenticated]
