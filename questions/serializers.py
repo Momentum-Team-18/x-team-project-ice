@@ -19,7 +19,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    answer_author = serializers.SlugRelatedField(slug_field="username", read_only=True)
+    answer_author = serializers.SlugRelatedField(
+        slug_field="username", read_only=True)
 
     class Meta:
         model = Answer
@@ -58,3 +59,9 @@ class UploadSerializer(serializers.ModelSerializer):
             "answer",
             "file",
         ]
+
+    def validate(self, data):
+        if data['question'] and data['answer']:
+            raise serializers.ValidationError(
+                'Only one id allowed for question or answer')
+        return data
