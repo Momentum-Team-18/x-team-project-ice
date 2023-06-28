@@ -1,12 +1,13 @@
 from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from django.shortcuts import render
-from questions.models import Question, Answer, Upload
+from questions.models import Question, Answer, Upload, Tag
 from questions.serializers import (
     QuestionSerializer,
     AnswerSerializer,
     QuestionWithAnswerSerializer,
     UploadSerializer,
+    TagSerializer,
 )
 from django.core.exceptions import PermissionDenied
 from rest_framework.views import APIView
@@ -125,13 +126,11 @@ class QuestionSearchViewSet(APIView):
 
         if question_text:
             results = results.filter(
-                question_text__icontains=request.query_params.get(
-                    "question_text")
+                question_text__icontains=request.query_params.get("question_text")
             )
         if question_title:
             results = results.filter(
-                question_title__icontains=request.query_params.get(
-                    "question_title")
+                question_title__icontains=request.query_params.get("question_title")
             )
 
         serializer = QuestionSerializer(results, many=True)
@@ -142,3 +141,12 @@ class UploadCreateView(generics.CreateAPIView):
     queryset = Upload.objects.all()
     serializer_class = UploadSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class TagCreateView(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(tag_user=self.request.user)

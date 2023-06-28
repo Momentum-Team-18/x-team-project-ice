@@ -39,4 +39,6 @@ urlpatterns = [
     ),
     # POST
     path("uploads/", views.UploadCreateView.as_view()),
+    # GET|POST
+    path("questions/tag/", views.TagCreateView.as_view()),
 ]
