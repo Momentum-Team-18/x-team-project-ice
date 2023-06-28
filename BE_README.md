@@ -118,3 +118,14 @@ https://questionapi.onrender.com
                         or
   GET /questions/search/?question_title=<search term>
 ```
+#### Create Tag
+
+```https://questionapi.onrender.com
+  POST /questions/tag/
+```
+
+| Parameter         | Type     | Description                       |
+| :--------         | :------- | :-------------------------------- |
+| `related_question`|`int`     |                                   |
+| `tag_user`        | `int`    |                                   |
+| `tag`             | `str`    |                                   |
