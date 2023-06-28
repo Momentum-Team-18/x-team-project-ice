@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from django.db.models import Q
 
 
 class User(AbstractUser):
@@ -40,13 +41,9 @@ class Answer(models.Model):
 
 
 class Upload(models.Model):
+
     question = models.ForeignKey(
-        to=Question,
-        on_delete=models.CASCADE,
-        related_name="uploads",
-        blank=True,
-        null=True,
-    )
+        to=Question, on_delete=models.CASCADE, related_name="uploads", blank=True, null=True,)
 
     answer = models.ForeignKey(
         to=Answer,
@@ -56,3 +53,7 @@ class Upload(models.Model):
         null=True,
     )
     file = models.FileField(upload_to="uploads/")
+
+    # class Meta:
+    #     constraints = [models.constraints.CheckConstraint(check=Q(question__isnull=True) | Q(
+    #         answer__isnull=True), name="ques_ans")]
