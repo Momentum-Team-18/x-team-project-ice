@@ -41,9 +41,13 @@ class Answer(models.Model):
 
 
 class Upload(models.Model):
-
     question = models.ForeignKey(
-        to=Question, on_delete=models.CASCADE, related_name="uploads", blank=True, null=True,)
+        to=Question,
+        on_delete=models.CASCADE,
+        related_name="uploads",
+        blank=True,
+        null=True,
+    )
 
     answer = models.ForeignKey(
         to=Answer,
@@ -54,6 +58,10 @@ class Upload(models.Model):
     )
     file = models.FileField(upload_to="uploads/")
 
-    # class Meta:
-    #     constraints = [models.constraints.CheckConstraint(check=Q(question__isnull=True) | Q(
-    #         answer__isnull=True), name="ques_ans")]
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=20)
+    related_question = models.ForeignKey(
+        to=Question, on_delete=models.CASCADE, related_name="tags"
+    )
+    tag_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="tags")
