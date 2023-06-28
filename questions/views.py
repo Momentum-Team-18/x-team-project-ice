@@ -150,3 +150,18 @@ class TagCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(tag_user=self.request.user)
+
+
+class TagSearchViewSet(APIView):
+    def get(self, request, format=None):
+        tag = request.query_params.get("tag")
+
+        results = Tag.objects.all()
+
+        if tag:
+            results = results.filter(
+                tag__icontains=request.query_params.get("tag")
+            )
+
+        serializer = TagSerializer(results, many=True)
+        return Response(serializer.data)

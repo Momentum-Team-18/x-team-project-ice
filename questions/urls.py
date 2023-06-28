@@ -41,4 +41,10 @@ urlpatterns = [
     path("uploads/", views.UploadCreateView.as_view()),
     # GET|POST
     path("questions/tag/", views.TagCreateView.as_view()),
+    # GET
+    path(
+        "tag/search/",
+        views.TagSearchViewSet.as_view(),
+        name="tag_search",
+    ),
 ]
