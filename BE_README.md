@@ -129,3 +129,8 @@ https://questionapi.onrender.com
 | `related_question`|`int`     |                                   |
 | `tag_user`        | `int`    |                                   |
 | `tag`             | `str`    |                                   |
+
+#### Search Tag
+
+```https://questionapi.onrender.com
+  GET /tag/search/?tag=<search term>
