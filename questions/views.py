@@ -40,7 +40,7 @@ class QuestionByUserViewSet(generics.ListCreateAPIView):
         "question_date",
         "question is answered",
     ]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return self.queryset.filter(question_author=self.request.user)
@@ -125,11 +125,13 @@ class QuestionSearchViewSet(APIView):
 
         if question_text:
             results = results.filter(
-                question_text__icontains=request.query_params.get("question_text")
+                question_text__icontains=request.query_params.get(
+                    "question_text")
             )
         if question_title:
             results = results.filter(
-                question_title__icontains=request.query_params.get("question_title")
+                question_title__icontains=request.query_params.get(
+                    "question_title")
             )
 
         serializer = QuestionSerializer(results, many=True)
