@@ -93,9 +93,28 @@ https://questionapi.onrender.com
 
 ```https://questionapi.onrender.com
   GET //user/answers/
+```
 
 #### Delete Question
 
 ```https://questionapi.onrender.com
   DELETE /questions/delete/pk
+```
+#### Upload File
+
+```https://questionapi.onrender.com
+  POST /upload/
+```
+
+| Parameter             | Type     | Description                       |
+| :--------             | :------- | :-------------------------------- |
+| `question` or `answer`|`int`     |                                   |
+|`file`                 | any file |                                   |
+
+#### Search Question Title & Text
+
+```https://questionapi.onrender.com
+  GET /questions/search/?question_text=<search term>
+                        or
+  GET /questions/search/?question_title=<search term>
 ```
