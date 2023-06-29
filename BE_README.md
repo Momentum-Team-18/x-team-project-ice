@@ -1,7 +1,7 @@
 
 # QuestionsAPI
 
-QuestionsAPI is a Django REST Framework that provides endpoints that enables users to register, login, post questions and answers regarding topics of their choosing.
+QuestionsAPI is a Django REST Framework that provides endpoints that enables users to register, login, post questions, answers, and files regarding topics of their choosing.
 
 
 ## API Reference
